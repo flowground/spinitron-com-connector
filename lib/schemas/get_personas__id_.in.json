@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "required": true,
+            "type": "integer"
+        },
+        "fields": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "expand": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

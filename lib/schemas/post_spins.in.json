@@ -1,0 +1,42 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "type": "object",
+            "properties": {
+                "live": {
+                    "description": "Only when automation params are configured with the \"Pass through\" mode.\nEnables \"live assist\" mode. Default mode is \"full automation\".\n",
+                    "type": "boolean"
+                },
+                "start": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "duration": {
+                    "type": "integer"
+                },
+                "artist": {
+                    "type": "string"
+                },
+                "release": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "genre": {
+                    "type": "string"
+                },
+                "song": {
+                    "type": "string"
+                },
+                "composer": {
+                    "type": "string"
+                },
+                "isrc": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

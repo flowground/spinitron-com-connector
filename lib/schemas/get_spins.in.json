@@ -1,0 +1,40 @@
+{
+    "type": "object",
+    "properties": {
+        "start": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "end": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "playlist_id": {
+            "type": "integer"
+        },
+        "show_id": {
+            "type": "integer"
+        },
+        "count": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 20
+        },
+        "page": {
+            "type": "integer",
+            "minimum": 1
+        },
+        "fields": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "expand": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

@@ -1,0 +1,189 @@
+{
+    "title": "Spinitron v2",
+    "description": "Maximum limit is 200. Default limit is 20.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/spinitron.com/1.0.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://spinitron.com/v2/api",
+                    "http://spinitron.com/v2/api",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "Bearer": {
+                "label": "Authorization (Bearer)",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "get_personas": {
+            "main": "./lib/actions/get_personas.js",
+            "title": "Get Personas",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_personas.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_personas__id_": {
+            "main": "./lib/actions/get_personas__id_.js",
+            "title": "Get Persona by id",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_personas__id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_playlists": {
+            "main": "./lib/actions/get_playlists.js",
+            "title": "Returns playlists optionally filtered by {start} and/or {end} datetimes",
+            "description": "Get Playlists optionally filtered by a datetime range.\nOnly past Playlists will be returned (with allowed tolerance equals 1 hour in future).\n\nOrdered chronologically from newest to oldest.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_playlists.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_playlists__id_": {
+            "main": "./lib/actions/get_playlists__id_.js",
+            "title": "Get a Playlist by id",
+            "description": "The response object represents the playlist specified by {id}.\n\nStatus 404 is returned if a playlist with {id} does not exist or if it does but starts in the future (with allowed tolerance equals 1 hour in future).\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_playlists__id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_shows": {
+            "main": "./lib/actions/get_shows.js",
+            "title": "Returns scheduled shows optionally filtered by {start} and/or {end} datetimes",
+            "description": "**Terminology**: Spinitron defines a *show* as a radio program. A show can have one or more *schedules*,\neach of which may specify either an *occurence* or a *repetition*, which represents a set of occurences.\nThus scheduled shows have occurences that, for example, may be displayed in a calendar.\n\nIn the response, `items` is an array of objects representing occurences of scheduled shows.\n\nYou may optionally filter `items` to a datetime *range* by including in the request {start} and/or {end}\nparameters, both of which must be no more than one hour in the past. An occurence starting at {end} is\nincluded in the reponse.\n\n`itmes` can include occurences that begin *or* end within the filter range. A show that goes on air before\n{start} appears in `items` if it ends *after* but not *at* {start}. An occurence starting at or before {end}\nis included.\n\nIf the request omits the {start} parameter, the server sets its value to the current time so that the filter\nrange's start is always defined. If the request specifies {end} then the requested range is *bounded*,\notherwise it is *unbounded*.\n\nFor a bounded request, `items` includes *every* occurence of all shows occuring in the range. The only\ndifference between objects in `items` representing a given show will be the `start` field value.\n\nFor an unbounded request, `items` includes *only one* occurence per show, specifically, the\nnext occurrence after {start} of all shows occuring after {start}.\n\nUse an unbounded request to get a straight list all shows. Use a bounded request to get a calendar/agenda\nof shows expanded into occurrences by thir shedules and repetitions.\n\nObjects in `items` are ordered first by `datetime` and then by `id`.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_shows.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_shows__id_": {
+            "main": "./lib/actions/get_shows__id_.js",
+            "title": "Get a Show by id",
+            "description": "The response object represents the next occurence of the show specified by {id}.\n\nStatus 404 is returned if a show with {id} does not exist or if it does but all its scheduled occurences elapsed in the past.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_shows__id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_spins": {
+            "main": "./lib/actions/get_spins.js",
+            "title": "Returns spins optionally filtered by {start} and/or {end} datetimes",
+            "description": "Get Spins optionally filtered by a datetime range. Only past Spins will be returned.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_spins.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_spins": {
+            "main": "./lib/actions/post_spins.js",
+            "title": "Log a Spin",
+            "description": "An endpoint for automation systems to log spins into the spin table.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_spins.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_spins__id_": {
+            "main": "./lib/actions/get_spins__id_.js",
+            "title": "Get a Spin by id",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_spins__id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

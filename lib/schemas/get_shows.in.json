@@ -1,0 +1,34 @@
+{
+    "type": "object",
+    "properties": {
+        "start": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "end": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "count": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 20
+        },
+        "page": {
+            "type": "integer",
+            "minimum": 1
+        },
+        "fields": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "expand": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}
